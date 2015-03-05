@@ -1,0 +1,78 @@
+h1, h2, h3, h4 {
+  font-weight: normal;
+}
+
+h1 {
+  margin: 50px 0;
+  font-size: 48px;
+  text-align: center;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.container {
+  padding: 40px 0;
+}
+
+.product {
+  margin-bottom: 20px;
+}
+
+.product input[type=number] {
+  margin-top: 42px;
+}
+
+.product .delete {
+  color: #34495e;
+  text-decoration: none;
+  padding: 10px;
+  font-size: 20px;
+  position: relative;
+  top: 20px;
+}
+
+.product .price,
+.total {
+  font-size: 32px;
+}
+
+.product .price {
+  margin-top: 42px;
+}
+
+.checkout {
+  margin-right: 20px;
+}
+
+.total, .total .discount {
+  color: #cccccc;
+}
+
+.total span {
+  color: #34495e;
+}
+
+.promo-code {
+  margin: 30px 0;
+}
+
+.promo-code input[type=checkbox] {
+  margin: 10px;
+}
+
+.discount {
+  display: inline-block;
+  margin: 0 15px;
+}
+
+.discount:before {
+  content: '( -';
+}
+
+.discount:after {
+  content: ' )';
+}
