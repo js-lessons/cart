@@ -1,10 +1,9 @@
 require("!style!css!less!../stylesheets/main.less");
 
-
 var $ = require("jquery");
 var _ = require("underscore");
 
-require("./Stuff.js");
+require("./lib/Stuff.js");
 
 var PRODUCTS = [
   {
