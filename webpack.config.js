@@ -1,14 +1,13 @@
 module.exports = {
-  context: __dirname + "/src",
-  entry: "./javascripts/application",
+  entry: __dirname + "/src/javascripts/main",
   output: {
       path: __dirname + "/public",
-      filename: "application.js",
+      filename: "main.js",
       publicPath: "/public/"
   },
   module: {
     loaders: [
-      { test: /\.less$/, loader: "style-loader!css-loader!less-loader" },
+      { test: /\.less$/, loader: "style!css!less" },
       { test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,   loader: "url?limit=10000&mimetype=application/font-woff" },
       { test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,   loader: "url?limit=10000&mimetype=application/font-woff2" },
       { test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,    loader: "url?limit=10000&mimetype=application/octet-stream" },
