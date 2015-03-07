@@ -6,6 +6,11 @@ var CartProductComponent = React.createClass({
     this.props.removeFromCartHandler(this.props.product.id);
   },
 
+  changeQuantity: function(e) {
+    var value = parseInt(e.target.value);
+    this.props.changeQuantityHandler(this.props.product.id, value);
+  },
+
   render: function() {
     return (
       <div className="row product">
@@ -19,7 +24,7 @@ var CartProductComponent = React.createClass({
           ${this.props.product.price}
         </div>
         <div className="col-md-1">
-          <input type="number" min="1" className="form-control" value={this.props.product.quantity}/>
+          <input onChange={this.changeQuantity} type="number" min="1" className="form-control" value={this.props.product.quantity}/>
         </div>
         <a href="#" onClick={this.removeFromCart} className="delete fui-cross"></a>
       </div>

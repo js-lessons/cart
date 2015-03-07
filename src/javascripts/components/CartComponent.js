@@ -6,6 +6,7 @@ var CartComponent = React.createClass({
     var productNodes = this.props.cart.map(function(product, index) {
       return (
         <CartProduct
+          changeQuantityHandler={this.props.changeQuantityHandler}
           removeFromCartHandler={this.props.removeFromCartHanler}
           product={product}
           key={index} />

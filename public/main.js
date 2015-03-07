@@ -152,6 +152,17 @@
 	    });
 	  },
 
+	  changeQuantity: function changeQuantity(id, quantity) {
+	    var product = CartStore.get(id);
+
+	    product.quantity = quantity;
+	    CartStore.update(id, product);
+
+	    this.setState({
+	      cart: this.getCartState()
+	    });
+	  },
+
 	  addToCart: function addToCart(code) {
 	    var cartProduct;
 	    var product = products.filter(function (product) {
@@ -182,7 +193,10 @@
 	      "div",
 	      { className: "app" },
 	      React.createElement(Shop, { addToCartHandler: this.addToCart, products: this.props.products }),
-	      React.createElement(Cart, { removeFromCartHanler: this.removeFromCart, cart: this.state.cart })
+	      React.createElement(Cart, {
+	        changeQuantityHandler: this.changeQuantity,
+	        removeFromCartHanler: this.removeFromCart,
+	        cart: this.state.cart })
 	    );
 	  }
 	});
@@ -9910,6 +9924,7 @@
 	  render: function render() {
 	    var productNodes = this.props.cart.map((function (product, index) {
 	      return React.createElement(CartProduct, {
+	        changeQuantityHandler: this.props.changeQuantityHandler,
 	        removeFromCartHandler: this.props.removeFromCartHanler,
 	        product: product,
 	        key: index });
@@ -10201,6 +10216,11 @@
 	    this.props.removeFromCartHandler(this.props.product.id);
 	  },
 
+	  changeQuantity: function changeQuantity(e) {
+	    var value = parseInt(e.target.value);
+	    this.props.changeQuantityHandler(this.props.product.id, value);
+	  },
+
 	  render: function render() {
 	    return React.createElement(
 	      "div",
@@ -10229,7 +10249,7 @@
 	      React.createElement(
 	        "div",
 	        { className: "col-md-1" },
-	        React.createElement("input", { type: "number", min: "1", className: "form-control", value: this.props.product.quantity })
+	        React.createElement("input", { onChange: this.changeQuantity, type: "number", min: "1", className: "form-control", value: this.props.product.quantity })
 	      ),
 	      React.createElement("a", { href: "#", onClick: this.removeFromCart, className: "delete fui-cross" })
 	    );

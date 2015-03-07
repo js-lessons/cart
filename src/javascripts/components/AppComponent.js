@@ -35,6 +35,17 @@ var AppComponent = React.createClass({
     });
   },
 
+  changeQuantity: function(id, quantity) {
+    var product = CartStore.get(id);
+
+    product.quantity = quantity;
+    CartStore.update(id, product);
+
+    this.setState({
+      cart: this.getCartState()
+    });
+  },
+
   addToCart: function(code) {
     var cartProduct;
     var product = products.filter(function(product) {
@@ -64,7 +75,10 @@ var AppComponent = React.createClass({
     return (
       <div className="app">
         <Shop addToCartHandler={this.addToCart} products={this.props.products} />
-        <Cart removeFromCartHanler={this.removeFromCart} cart={this.state.cart}/>
+        <Cart
+          changeQuantityHandler={this.changeQuantity}
+          removeFromCartHanler={this.removeFromCart}
+          cart={this.state.cart}/>
       </div>
     );
   }
