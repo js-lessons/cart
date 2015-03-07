@@ -1,6 +1,11 @@
 var React = require('react');
 
 var CartProductComponent = React.createClass({
+  removeFromCart: function (e) {
+    e.preventDefault();
+    this.props.removeFromCartHandler(this.props.product.id);
+  },
+
   render: function() {
     return (
       <div className="row product">
@@ -16,7 +21,7 @@ var CartProductComponent = React.createClass({
         <div className="col-md-1">
           <input type="number" min="1" className="form-control" value={this.props.product.quantity}/>
         </div>
-        <a className="delete fui-cross"></a>
+        <a href="#" onClick={this.removeFromCart} className="delete fui-cross"></a>
       </div>
     );
   }

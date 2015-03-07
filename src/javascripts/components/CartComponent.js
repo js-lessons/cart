@@ -5,9 +5,12 @@ var CartComponent = React.createClass({
   render: function() {
     var productNodes = this.props.cart.map(function(product, index) {
       return (
-        <CartProduct product={product} key={index} />
+        <CartProduct
+          removeFromCartHandler={this.props.removeFromCartHanler}
+          product={product}
+          key={index} />
       );
-    });
+    }.bind(this));
 
     var total = this.props.cart.reduce(function(sum, product) {
       return sum += product.price * product.quantity;

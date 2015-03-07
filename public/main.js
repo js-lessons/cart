@@ -65,20 +65,20 @@
 
 	  /* Cart handlers */
 
-	  $("#app").on("click", ".delete", function (e) {
-	    e.preventDefault();
-	    var id = $(e.target).data("product");
-	    CartStore.remove(id);
-	  });
+	  //$('#app').on('click', '.delete', function(e) {
+	  //e.preventDefault();
+	  //var id = $(e.target).data('product');
+	  //CartStore.remove(id);
+	  //});
 
-	  $("#app").on("change", "input", function (e) {
-	    var id = $(e.target).data("product");
-	    var value = $(e.target).val();
-	    var product = CartStore.get(id);
+	  //$('#app').on('change', 'input', function(e) {
+	  //var id = $(e.target).data('product');
+	  //var value = $(e.target).val();
+	  //var product = CartStore.get(id);
 
-	    product.quantity = parseInt(value);
-	    CartStore.update(id, product);
-	  });
+	  //product.quantity = parseInt(value);
+	  //CartStore.update(id, product);
+	  //});
 	});
 
 /***/ },
@@ -144,6 +144,14 @@
 	    });
 	  },
 
+	  removeFromCart: function removeFromCart(id) {
+	    CartStore.remove(id);
+
+	    this.setState({
+	      cart: this.getCartState()
+	    });
+	  },
+
 	  addToCart: function addToCart(code) {
 	    var cartProduct;
 	    var product = products.filter(function (product) {
@@ -174,7 +182,7 @@
 	      "div",
 	      { className: "app" },
 	      React.createElement(Shop, { addToCartHandler: this.addToCart, products: this.props.products }),
-	      React.createElement(Cart, { cart: this.state.cart })
+	      React.createElement(Cart, { removeFromCartHanler: this.removeFromCart, cart: this.state.cart })
 	    );
 	  }
 	});
@@ -9900,9 +9908,12 @@
 	  displayName: "CartComponent",
 
 	  render: function render() {
-	    var productNodes = this.props.cart.map(function (product, index) {
-	      return React.createElement(CartProduct, { product: product, key: index });
-	    });
+	    var productNodes = this.props.cart.map((function (product, index) {
+	      return React.createElement(CartProduct, {
+	        removeFromCartHandler: this.props.removeFromCartHanler,
+	        product: product,
+	        key: index });
+	    }).bind(this));
 
 	    var total = this.props.cart.reduce(function (sum, product) {
 	      return sum += product.price * product.quantity;
@@ -10185,6 +10196,11 @@
 	var CartProductComponent = React.createClass({
 	  displayName: "CartProductComponent",
 
+	  removeFromCart: function removeFromCart(e) {
+	    e.preventDefault();
+	    this.props.removeFromCartHandler(this.props.product.id);
+	  },
+
 	  render: function render() {
 	    return React.createElement(
 	      "div",
@@ -10215,7 +10231,7 @@
 	        { className: "col-md-1" },
 	        React.createElement("input", { type: "number", min: "1", className: "form-control", value: this.props.product.quantity })
 	      ),
-	      React.createElement("a", { className: "delete fui-cross" })
+	      React.createElement("a", { href: "#", onClick: this.removeFromCart, className: "delete fui-cross" })
 	    );
 	  }
 	});

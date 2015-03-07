@@ -21,18 +21,18 @@ $(function() {
 
   /* Cart handlers */
 
-  $('#app').on('click', '.delete', function(e) {
-    e.preventDefault();
-    var id = $(e.target).data('product');
-    CartStore.remove(id);
-  });
+  //$('#app').on('click', '.delete', function(e) {
+    //e.preventDefault();
+    //var id = $(e.target).data('product');
+    //CartStore.remove(id);
+  //});
 
-  $('#app').on('change', 'input', function(e) {
-    var id = $(e.target).data('product');
-    var value = $(e.target).val();
-    var product = CartStore.get(id);
+  //$('#app').on('change', 'input', function(e) {
+    //var id = $(e.target).data('product');
+    //var value = $(e.target).val();
+    //var product = CartStore.get(id);
 
-    product.quantity = parseInt(value);
-    CartStore.update(id, product);
-  });
+    //product.quantity = parseInt(value);
+    //CartStore.update(id, product);
+  //});
 });
