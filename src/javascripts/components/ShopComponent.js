@@ -5,9 +5,9 @@ var ShopComponent = React.createClass({
   render: function() {
     var productNodes = this.props.products.map(function(product, index) {
       return (
-        <Product product={product} key={index} />
+        <Product addToCartHandler={this.props.addToCartHandler} product={product} key={index} />
       );
-    });
+    }.bind(this));
 
     return (
       <div className="shop">
