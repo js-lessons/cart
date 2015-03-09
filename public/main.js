@@ -651,9 +651,11 @@
 	  displayName: "ShopComponent",
 
 	  render: function render() {
-	    var productNodes = this.props.products.map((function (product, index) {
-	      return React.createElement(Product, { addToCartHandler: this.props.addToCartHandler, product: product, key: index });
-	    }).bind(this));
+	    var _this = this;
+
+	    var productNodes = this.props.products.map(function (product, index) {
+	      return React.createElement(Product, { addToCartHandler: _this.props.addToCartHandler, product: product, key: index });
+	    });
 
 	    return React.createElement(
 	      "div",
@@ -687,13 +689,15 @@
 	  displayName: "CartComponent",
 
 	  render: function render() {
-	    var productNodes = this.props.cart.map((function (product, index) {
+	    var _this = this;
+
+	    var productNodes = this.props.cart.map(function (product, index) {
 	      return React.createElement(CartProduct, {
-	        changeQuantityHandler: this.props.changeQuantityHandler,
-	        removeFromCartHandler: this.props.removeFromCartHanler,
+	        changeQuantityHandler: _this.props.changeQuantityHandler,
+	        removeFromCartHandler: _this.props.removeFromCartHanler,
 	        product: product,
 	        key: index });
-	    }).bind(this));
+	    });
 
 	    var total = this.props.cart.reduce(function (sum, product) {
 	      return sum += product.price * product.quantity;
@@ -10282,7 +10286,7 @@
 	var EventConstants = __webpack_require__(117);
 	var EventPropagators = __webpack_require__(213);
 	var ExecutionEnvironment = __webpack_require__(41);
-	var SyntheticInputEvent = __webpack_require__(214);
+	var SyntheticInputEvent = __webpack_require__(216);
 
 	var keyOf = __webpack_require__(130);
 
@@ -10509,10 +10513,10 @@
 	var EventPropagators = __webpack_require__(213);
 	var ExecutionEnvironment = __webpack_require__(41);
 	var ReactUpdates = __webpack_require__(122);
-	var SyntheticEvent = __webpack_require__(215);
+	var SyntheticEvent = __webpack_require__(214);
 
 	var isEventSupported = __webpack_require__(137);
-	var isTextInputElement = __webpack_require__(216);
+	var isTextInputElement = __webpack_require__(215);
 	var keyOf = __webpack_require__(130);
 
 	var topLevelTypes = EventConstants.topLevelTypes;
@@ -12809,10 +12813,10 @@
 	var EventConstants = __webpack_require__(117);
 	var EventPropagators = __webpack_require__(213);
 	var ReactInputSelection = __webpack_require__(217);
-	var SyntheticEvent = __webpack_require__(215);
+	var SyntheticEvent = __webpack_require__(214);
 
 	var getActiveElement = __webpack_require__(230);
-	var isTextInputElement = __webpack_require__(216);
+	var isTextInputElement = __webpack_require__(215);
 	var keyOf = __webpack_require__(130);
 	var shallowEqual = __webpack_require__(231);
 
@@ -13044,7 +13048,7 @@
 	var EventPluginUtils = __webpack_require__(19);
 	var EventPropagators = __webpack_require__(213);
 	var SyntheticClipboardEvent = __webpack_require__(232);
-	var SyntheticEvent = __webpack_require__(215);
+	var SyntheticEvent = __webpack_require__(214);
 	var SyntheticFocusEvent = __webpack_require__(233);
 	var SyntheticKeyboardEvent = __webpack_require__(234);
 	var SyntheticMouseEvent = __webpack_require__(220);
@@ -15918,57 +15922,6 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
-	 * Copyright 2013 Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @providesModule SyntheticInputEvent
-	 * @typechecks static-only
-	 */
-
-	"use strict";
-
-	var SyntheticEvent = __webpack_require__(215);
-
-	/**
-	 * @interface Event
-	 * @see http://www.w3.org/TR/2013/WD-DOM-Level-3-Events-20131105
-	 *      /#events-inputevents
-	 */
-	var InputEventInterface = {
-	  data: null
-	};
-
-	/**
-	 * @param {object} dispatchConfig Configuration used to dispatch this event.
-	 * @param {string} dispatchMarker Marker identifying the event target.
-	 * @param {object} nativeEvent Native browser event.
-	 * @extends {SyntheticUIEvent}
-	 */
-	function SyntheticInputEvent(
-	  dispatchConfig,
-	  dispatchMarker,
-	  nativeEvent) {
-	  SyntheticEvent.call(this, dispatchConfig, dispatchMarker, nativeEvent);
-	}
-
-	SyntheticEvent.augmentClass(
-	  SyntheticInputEvent,
-	  InputEventInterface
-	);
-
-	module.exports = SyntheticInputEvent;
-
-
-
-/***/ },
-/* 215 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
 	 * Copyright 2013-2014, Facebook, Inc.
 	 * All rights reserved.
 	 *
@@ -16127,7 +16080,7 @@
 
 
 /***/ },
-/* 216 */
+/* 215 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -16172,6 +16125,57 @@
 	}
 
 	module.exports = isTextInputElement;
+
+
+/***/ },
+/* 216 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright 2013 Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule SyntheticInputEvent
+	 * @typechecks static-only
+	 */
+
+	"use strict";
+
+	var SyntheticEvent = __webpack_require__(214);
+
+	/**
+	 * @interface Event
+	 * @see http://www.w3.org/TR/2013/WD-DOM-Level-3-Events-20131105
+	 *      /#events-inputevents
+	 */
+	var InputEventInterface = {
+	  data: null
+	};
+
+	/**
+	 * @param {object} dispatchConfig Configuration used to dispatch this event.
+	 * @param {string} dispatchMarker Marker identifying the event target.
+	 * @param {object} nativeEvent Native browser event.
+	 * @extends {SyntheticUIEvent}
+	 */
+	function SyntheticInputEvent(
+	  dispatchConfig,
+	  dispatchMarker,
+	  nativeEvent) {
+	  SyntheticEvent.call(this, dispatchConfig, dispatchMarker, nativeEvent);
+	}
+
+	SyntheticEvent.augmentClass(
+	  SyntheticInputEvent,
+	  InputEventInterface
+	);
+
+	module.exports = SyntheticInputEvent;
+
 
 
 /***/ },
@@ -16332,7 +16336,7 @@
 
 	"use strict";
 
-	var SyntheticEvent = __webpack_require__(215);
+	var SyntheticEvent = __webpack_require__(214);
 
 	/**
 	 * @interface Event
@@ -17457,7 +17461,7 @@
 
 	"use strict";
 
-	var SyntheticEvent = __webpack_require__(215);
+	var SyntheticEvent = __webpack_require__(214);
 
 	/**
 	 * @interface Event
@@ -17736,7 +17740,7 @@
 
 	"use strict";
 
-	var SyntheticEvent = __webpack_require__(215);
+	var SyntheticEvent = __webpack_require__(214);
 
 	var getEventTarget = __webpack_require__(228);
 

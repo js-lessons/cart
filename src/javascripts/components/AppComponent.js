@@ -9,25 +9,25 @@ var products = require('../data/products');
 var CartStore = Stuff('shopping_cart');
 
 var AppComponent = React.createClass({
-  getInitialState: function() {
+  getInitialState() {
     return { cart: [] }
   },
 
-  getCartState: function() {
-    return CartStore.map(function (id) {
+  getCartState() {
+    return CartStore.map(id => {
       var product = CartStore.get(id);
       product.id = id;
       return product;
     });
   },
 
-  componentWillMount: function() {
+  componentWillMount() {
     this.setState({
       cart: this.getCartState()
     });
   },
 
-  removeFromCart: function(id) {
+  removeFromCart(id) {
     CartStore.remove(id);
 
     this.setState({
@@ -35,7 +35,7 @@ var AppComponent = React.createClass({
     });
   },
 
-  changeQuantity: function(id, quantity) {
+  changeQuantity(id, quantity) {
     var product = CartStore.get(id);
 
     product.quantity = quantity;
@@ -46,7 +46,7 @@ var AppComponent = React.createClass({
     });
   },
 
-  addToCart: function(code) {
+  addToCart(code) {
     var cartProduct;
     var product = products.filter(function(product) {
       return product.code === code;
@@ -71,7 +71,7 @@ var AppComponent = React.createClass({
     });
   },
 
-  render: function() {
+  render() {
     return (
       <div className="app">
         <Shop addToCartHandler={this.addToCart} products={this.props.products} />

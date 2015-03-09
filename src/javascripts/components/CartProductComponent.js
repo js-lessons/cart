@@ -1,17 +1,17 @@
 var React = require('react');
 
 var CartProductComponent = React.createClass({
-  removeFromCart: function (e) {
+  removeFromCart(e) {
     e.preventDefault();
     this.props.removeFromCartHandler(this.props.product.id);
   },
 
-  changeQuantity: function(e) {
+  changeQuantity(e) {
     var value = parseInt(e.target.value);
     this.props.changeQuantityHandler(this.props.product.id, value);
   },
 
-  render: function() {
+  render() {
     return (
       <div className="row product">
         <img className="col-md-3" src={this.props.product.img} alt={this.props.product.title} />

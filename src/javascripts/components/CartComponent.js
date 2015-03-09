@@ -2,8 +2,8 @@ var React = require('react');
 var CartProduct = require('./CartProductComponent');
 
 var CartComponent = React.createClass({
-  render: function() {
-    var productNodes = this.props.cart.map(function(product, index) {
+  render() {
+    var productNodes = this.props.cart.map((product, index) => {
       return (
         <CartProduct
           changeQuantityHandler={this.props.changeQuantityHandler}
@@ -11,7 +11,7 @@ var CartComponent = React.createClass({
           product={product}
           key={index} />
       );
-    }.bind(this));
+    });
 
     var total = this.props.cart.reduce(function(sum, product) {
       return sum += product.price * product.quantity;
