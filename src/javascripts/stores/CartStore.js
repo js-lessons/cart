@@ -8,7 +8,7 @@ var CartConstants = require('../constants/CartConstants');
 var CartActions = require('../actions/CartActions');
 
 var PRODUCTS = require('../data/products');
-var CHANGE_EVENT = CartConstants.CHANGE;
+var CHANGE_EVENT = 'change';
 
 var _cartProducts = [];
 
