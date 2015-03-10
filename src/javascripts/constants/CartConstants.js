@@ -7,8 +7,4 @@ module.exports = keyMirror({
   CART_ADD: null,
   CART_REMOVE: null,
   CART_CHANGE_QUANTITY: null,
-
-  /* events */
-  CHANGE: null
-
 });
