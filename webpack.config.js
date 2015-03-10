@@ -1,9 +1,10 @@
 module.exports = {
   entry: __dirname + "/src/javascripts/main",
+  devtool: 'source-map',
   output: {
-      path: __dirname + "/public",
-      filename: "main.js",
-      publicPath: "./public/"
+    path: __dirname + "/public",
+    filename: "main.js",
+    publicPath: "./public/",
   },
   module: {
     loaders: [
@@ -16,7 +17,7 @@ module.exports = {
       { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=image/svg+xml" },
       { test: /\.gif/, loader: "url?limit=10000&mimetype=image/gif" },
       { test: /\.jpg/, loader: "url?limit=10000&mimetype=image/jpg" },
-      { test: /\.png/, loader: "url?limit=10000&mimetype=image/png" },
+      { test: /\.png/, loader: "url?limit=10000&mimetype=image/png" }
     ]
   }
 }

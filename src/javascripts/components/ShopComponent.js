@@ -5,7 +5,7 @@ var ShopComponent = React.createClass({
   render() {
     var productNodes = this.props.products.map((product, index) => {
       return (
-        <Product addToCartHandler={this.props.addToCartHandler} product={product} key={index} />
+        <Product product={product} key={index} />
       );
     });
 
