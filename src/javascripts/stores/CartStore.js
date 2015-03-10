@@ -21,7 +21,7 @@ function _receiveCartData(data) {
 function _cartAdd(code) {
   var cartProduct;
 
-  var product = PRODUCTS.filter(function(product) {
+  var product = PRODUCTS.filter(product => {
     return product.code === code;
   })[0];
 
@@ -49,7 +49,7 @@ function _changeQuantity(code, quantity) {
 
 var CartStore = extend({}, EventEmitter.prototype, {
   isInCart(product) {
-    return _cartProducts.some(function(p) { return p.code == product.code });
+    return _cartProducts.some(p => { return p.code == product.code });
   },
 
   getProducts() {
@@ -57,7 +57,7 @@ var CartStore = extend({}, EventEmitter.prototype, {
   },
 
   getProduct(code) {
-    return _cartProducts.find(function(p) { return p.code == code });
+    return _cartProducts.find(p => { return p.code == code });
   },
 
   emitChange() {
