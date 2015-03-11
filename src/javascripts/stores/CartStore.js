@@ -7,26 +7,23 @@ var PRODUCTS = require('../data/products');
 var backend = require('../utils/backendSync');
 
 var CartStore = Reflux.createStore({
+  listenables: actions,
+
   init() {
     this._cartProducts = [];
-
-    this.listenTo(actions.receiveCartData, this._receiveCartData);
-    this.listenTo(actions.addToCart, this._addToCart);
-    this.listenTo(actions.removeFromCart, this._removeFromCart);
-    this.listenTo(actions.changeQuantity, this._changeQuantity);
   },
 
   triggerChange() {
     this.trigger(this._cartProducts);
   },
 
-  _receiveCartData(data) {
+  onReceiveCartData(data) {
     this._cartProducts = data;
 
     this.triggerChange();
   },
 
-  _addToCart(code) {
+  onAddToCart(code) {
     var cartProduct;
 
     var product = PRODUCTS.filter(product => {
@@ -46,7 +43,7 @@ var CartStore = Reflux.createStore({
     this.triggerChange();
   },
 
-  _removeFromCart(code) {
+  onRemoveFromCart(code) {
     var cartProduct = this.getProduct(code);
     this._cartProducts.splice(this._cartProducts.indexOf(cartProduct), 1);
 
@@ -55,7 +52,7 @@ var CartStore = Reflux.createStore({
     this.triggerChange();
   },
 
-  _changeQuantity(code, quantity) {
+  onChangeQuantity(code, quantity) {
     var cartProduct = this.getProduct(code);
     cartProduct.quantity = quantity;
 
@@ -66,10 +63,6 @@ var CartStore = Reflux.createStore({
 
   isInCart(product) {
     return this._cartProducts.some(p => { return p.code == product.code });
-  },
-
-  getProducts() {
-    return this._cartProducts;
   },
 
   getProduct(code) {

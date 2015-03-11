@@ -160,28 +160,15 @@
 	
 	var Shop = __webpack_require__(9);
 	var Cart = __webpack_require__(10);
-	
 	var CartStore = __webpack_require__(11);
 	
 	var AppComponent = React.createClass({
 	  displayName: "AppComponent",
 	
-	  mixins: [Reflux.ListenerMixin],
-	
-	  componentWillMount: function componentWillMount() {
-	    this.unsubscribe = this.listenTo(CartStore, this.updateState);
-	  },
-	
-	  componentWillUnmount: function componentWillUnmount() {
-	    this.unsubscribe();
-	  },
+	  mixins: [Reflux.connect(CartStore, "cart")],
 	
 	  getInitialState: function getInitialState() {
 	    return { cart: [] };
-	  },
-	
-	  updateState: function updateState() {
-	    this.setState({ cart: CartStore.getProducts() });
 	  },
 	
 	  render: function render() {
@@ -571,26 +558,23 @@
 	var backend = __webpack_require__(2);
 	
 	var CartStore = Reflux.createStore({
+	  listenables: actions,
+	
 	  init: function init() {
 	    this._cartProducts = [];
-	
-	    this.listenTo(actions.receiveCartData, this._receiveCartData);
-	    this.listenTo(actions.addToCart, this._addToCart);
-	    this.listenTo(actions.removeFromCart, this._removeFromCart);
-	    this.listenTo(actions.changeQuantity, this._changeQuantity);
 	  },
 	
 	  triggerChange: function triggerChange() {
 	    this.trigger(this._cartProducts);
 	  },
 	
-	  _receiveCartData: function _receiveCartData(data) {
+	  onReceiveCartData: function onReceiveCartData(data) {
 	    this._cartProducts = data;
 	
 	    this.triggerChange();
 	  },
 	
-	  _addToCart: function _addToCart(code) {
+	  onAddToCart: function onAddToCart(code) {
 	    var cartProduct;
 	
 	    var product = PRODUCTS.filter(function (product) {
@@ -610,7 +594,7 @@
 	    this.triggerChange();
 	  },
 	
-	  _removeFromCart: function _removeFromCart(code) {
+	  onRemoveFromCart: function onRemoveFromCart(code) {
 	    var cartProduct = this.getProduct(code);
 	    this._cartProducts.splice(this._cartProducts.indexOf(cartProduct), 1);
 	
@@ -619,7 +603,7 @@
 	    this.triggerChange();
 	  },
 	
-	  _changeQuantity: function _changeQuantity(code, quantity) {
+	  onChangeQuantity: function onChangeQuantity(code, quantity) {
 	    var cartProduct = this.getProduct(code);
 	    cartProduct.quantity = quantity;
 	
@@ -632,10 +616,6 @@
 	    return this._cartProducts.some(function (p) {
 	      return p.code == product.code;
 	    });
-	  },
-	
-	  getProducts: function getProducts() {
-	    return this._cartProducts;
 	  },
 	
 	  getProduct: function getProduct(code) {

@@ -4,9 +4,7 @@ var Product = require('./ProductComponent');
 var ShopComponent = React.createClass({
   render() {
     var productNodes = this.props.products.map((product, index) => {
-      return (
-        <Product product={product} key={index} />
-      );
+      return <Product product={product} key={index} />
     });
 
     return (

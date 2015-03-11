@@ -4,9 +4,7 @@ var CartProduct = require('./CartProductComponent');
 var CartComponent = React.createClass({
   render() {
     var productNodes = this.props.cart.map((product, index) => {
-      return (
-        <CartProduct product={product} key={index} />
-      );
+      return <CartProduct product={product} key={index} />
     });
 
     var total = this.props.cart.reduce((sum, product) => {
