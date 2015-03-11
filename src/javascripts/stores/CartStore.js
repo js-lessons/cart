@@ -1,105 +1,80 @@
 require('array.prototype.find');
 
+var Reflux = require('reflux');
 var extend = require('underscore').extend;
-var EventEmitter = require('events').EventEmitter;
-
-var AppDispatcher = require('../dispatchers/AppDispatcher');
-var CartConstants = require('../constants/CartConstants');
-var CartActions = require('../actions/CartActions');
-
+var actions = require('../actions/CartActions');
 var PRODUCTS = require('../data/products');
-var CHANGE_EVENT = 'change';
+var backend = require('../utils/backendSync');
 
-var _cartProducts = [];
+var CartStore = Reflux.createStore({
+  init() {
+    this._cartProducts = [];
 
+    this.listenTo(actions.receiveCartData, this._receiveCartData);
+    this.listenTo(actions.addToCart, this._addToCart);
+    this.listenTo(actions.removeFromCart, this._removeFromCart);
+    this.listenTo(actions.changeQuantity, this._changeQuantity);
+  },
 
-function _receiveCartData(data) {
-  _cartProducts = data;
-}
+  triggerChange() {
+    this.trigger(this._cartProducts);
+  },
 
+  _receiveCartData(data) {
+    this._cartProducts = data;
 
-function _cartAdd(code) {
-  var cartProduct;
+    this.triggerChange();
+  },
 
-  var product = PRODUCTS.filter(product => {
-    return product.code === code;
-  })[0];
+  _addToCart(code) {
+    var cartProduct;
 
-  if (CartStore.isInCart(product)) {
-    cartProduct = CartStore.getProduct(code);
-    cartProduct.quantity++;
-  } else {
-    cartProduct = extend({}, product, { quantity: 1 });
-    _cartProducts.push(cartProduct);
-  }
-}
+    var product = PRODUCTS.filter(product => {
+      return product.code === code;
+    })[0];
 
+    if (this.isInCart(product)) {
+      cartProduct = this.getProduct(code);
+      cartProduct.quantity++;
+    } else {
+      cartProduct = extend({}, product, { quantity: 1 });
+      this._cartProducts.push(cartProduct);
+    }
 
-function _cartRemove(code) {
-  var cartProduct = CartStore.getProduct(code);
-  _cartProducts.splice(_cartProducts.indexOf(cartProduct), 1);
-}
+    backend.add(code);
 
+    this.triggerChange();
+  },
 
-function _changeQuantity(code, quantity) {
-  var cartProduct = CartStore.getProduct(code);
-  cartProduct.quantity = quantity;
-}
+  _removeFromCart(code) {
+    var cartProduct = this.getProduct(code);
+    this._cartProducts.splice(this._cartProducts.indexOf(cartProduct), 1);
 
+    backend.remove(code);
 
-var CartStore = extend({}, EventEmitter.prototype, {
+    this.triggerChange();
+  },
+
+  _changeQuantity(code, quantity) {
+    var cartProduct = this.getProduct(code);
+    cartProduct.quantity = quantity;
+
+    backend.changeQuantity(code, quantity);
+
+    this.triggerChange();
+  },
+
   isInCart(product) {
-    return _cartProducts.some(p => { return p.code == product.code });
+    return this._cartProducts.some(p => { return p.code == product.code });
   },
 
   getProducts() {
-    return _cartProducts;
+    return this._cartProducts;
   },
 
   getProduct(code) {
-    return _cartProducts.find(p => { return p.code == code });
-  },
-
-  emitChange() {
-    this.emit(CHANGE_EVENT);
-  },
-
-  addChangeListener(callback) {
-    this.on(CHANGE_EVENT, callback);
-  },
-
-  removeChangeListener(callback) {
-    this.removeListener(CHANGE_EVENT, callback);
+    return this._cartProducts.find(p => { return p.code == code });
   }
-});
-
-AppDispatcher.register(function(payload) {
-  var action = payload.action;
-
-  switch(action.actionType) {
-    case CartConstants.RECEIVE_CART_DATA:
-      _receiveCartData(action.data);
-      break;
-
-    case CartConstants.CART_ADD:
-      _cartAdd(action.code);
-      break;
-
-    case CartConstants.CART_REMOVE:
-      _cartRemove(action.code);
-      break;
-
-    case CartConstants.CART_CHANGE_QUANTITY:
-      _changeQuantity(action.code, action.quantity);
-      break;
-
-    default:
-      return true;
-  }
-
-  CartStore.emitChange();
-
-  return true;
 });
 
 module.exports = CartStore;

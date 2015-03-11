@@ -7,7 +7,7 @@ var CartStuff = Stuff('shopping_cart');
 module.exports = {
   fetch() {
     // circular deps workaround
-    var CartActions = require('../actions/CartActions');
+    var actions = require('../actions/CartActions');
 
     var data = Stuff('shopping_cart').map(id => {
       var product = Stuff('shopping_cart').get(id);
@@ -15,7 +15,7 @@ module.exports = {
       return product;
     });
 
-    CartActions.receiveCartData(data);
+    actions.receiveCartData(data);
   },
 
 

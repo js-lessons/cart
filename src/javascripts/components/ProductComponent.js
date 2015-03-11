@@ -1,10 +1,10 @@
 var React = require('react');
-var CartActions = require('../actions/CartActions');
+var actions = require('../actions/CartActions');
 
 var ProductComponent = React.createClass({
   addToCart(e) {
     e.preventDefault();
-    CartActions.addToCart(this.props.product.code)
+    actions.addToCart(this.props.product.code);
   },
 
   render() {

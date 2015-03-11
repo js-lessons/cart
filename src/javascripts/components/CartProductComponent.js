@@ -1,15 +1,15 @@
 var React = require('react');
-var CartActions = require('../actions/CartActions');
+var actions = require('../actions/CartActions');
 
 var CartProductComponent = React.createClass({
   removeFromCart(e) {
     e.preventDefault();
-    CartActions.removeFromCart(this.props.product.code);
+    actions.removeFromCart(this.props.product.code);
   },
 
   changeQuantity(e) {
     var value = parseInt(e.target.value);
-    CartActions.changeQuantity(this.props.product.code, value);
+    actions.changeQuantity(this.props.product.code, value);
   },
 
   render() {
