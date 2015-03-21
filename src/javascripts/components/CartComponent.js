@@ -12,12 +12,12 @@ var CartComponent = React.createClass({
     }, 0);
 
     return (
-      <div className="cart">
+      <div className='cart'>
         <h1>Your order</h1>
         {productNodes}
-        <div className="row">
-          <div className="total col-md-3">
-            Total: <span className="total-amount">${total}</span>
+        <div className='row'>
+          <div className='total col-md-3'>
+            Total: <span className='total-amount'>${total}</span>
           </div>
         </div>
       </div>

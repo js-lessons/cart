@@ -14,7 +14,7 @@ var AppComponent = React.createClass({
 
   render() {
     return (
-      <div className="app">
+      <div className='app'>
         <Shop products={this.props.products} />
         <Cart cart={this.state.cart}/>
       </div>

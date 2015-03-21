@@ -8,9 +8,9 @@ var ShopComponent = React.createClass({
     });
 
     return (
-      <div className="shop">
+      <div className='shop'>
         <h1>Shop</h1>
-        <div className="row">
+        <div className='row'>
           {productNodes}
         </div>
       </div>

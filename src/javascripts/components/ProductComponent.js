@@ -9,7 +9,7 @@ var ProductComponent = React.createClass({
 
   render() {
     return (
-      <a href="#" className="col-md-4" onClick={this.addToCart}>
+      <a href='#' className='col-md-4' onClick={this.addToCart}>
         <img src={this.props.product.img} alt={this.props.product.title} />
       </a>
     );
