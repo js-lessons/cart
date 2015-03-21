@@ -1,10 +1,11 @@
-require('../lib/Stuff');
+import '../lib/Stuff';
 
-var extend = require('underscore').extend;
-var PRODUCTS = require('../data/products');
+import { extend } from 'underscore';
+import PRODUCTS from '../data/products';
+
 var CartStuff = Stuff('shopping_cart');
 
-module.exports = {
+export default {
   fetch() {
     // circular deps workaround
     var actions = require('../actions/CartActions');

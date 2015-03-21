@@ -1,10 +1,10 @@
-require('array.prototype.find');
+import 'array.prototype.find';
 
-var Reflux = require('reflux');
-var extend = require('underscore').extend;
-var actions = require('../actions/CartActions');
-var PRODUCTS = require('../data/products');
-var backend = require('../utils/backendSync');
+import Reflux from 'reflux';
+import { extend } from 'underscore';
+import actions from '../actions/CartActions';
+import PRODUCTS from '../data/products';
+import backend from '../utils/backendSync';
 
 var CartStore = Reflux.createStore({
   listenables: actions,
@@ -70,4 +70,4 @@ var CartStore = Reflux.createStore({
   }
 });
 
-module.exports = CartStore;
+export default CartStore;

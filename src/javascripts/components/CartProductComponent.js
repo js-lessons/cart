@@ -1,5 +1,5 @@
-var React = require('react');
-var actions = require('../actions/CartActions');
+import React from 'react';
+import actions from '../actions/CartActions';
 
 var CartProductComponent = React.createClass({
   removeFromCart(e) {
@@ -37,4 +37,4 @@ var CartProductComponent = React.createClass({
   }
 });
 
-module.exports = CartProductComponent;
+export default CartProductComponent;

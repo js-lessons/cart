@@ -1,10 +1,9 @@
-require("!style!css!less!../stylesheets/main.less");
+import "!style!css!less!../stylesheets/main.less";
 
-var React = require("react");
-
-var products = require('./data/products');
-var Backend = require('./utils/backendSync');
-var AppComponent = require('./components/AppComponent');
+import React from 'react';
+import products from './data/products';
+import Backend from './utils/backendSync';
+import AppComponent from './components/AppComponent';
 
 window.React = React;
 

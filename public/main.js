@@ -46,13 +46,17 @@
 
 	"use strict";
 	
+	var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
+	
 	__webpack_require__(4);
 	
-	var React = __webpack_require__(7);
+	var React = _interopRequire(__webpack_require__(7));
 	
-	var products = __webpack_require__(1);
-	var Backend = __webpack_require__(2);
-	var AppComponent = __webpack_require__(3);
+	var products = _interopRequire(__webpack_require__(1));
+	
+	var Backend = _interopRequire(__webpack_require__(2));
+	
+	var AppComponent = _interopRequire(__webpack_require__(3));
 	
 	window.React = React;
 	
@@ -92,10 +96,14 @@
 
 	"use strict";
 	
+	var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
+	
 	__webpack_require__(8);
 	
 	var extend = __webpack_require__(15).extend;
-	var PRODUCTS = __webpack_require__(1);
+	
+	var PRODUCTS = _interopRequire(__webpack_require__(1));
+	
 	var CartStuff = Stuff("shopping_cart");
 	
 	module.exports = {
@@ -155,12 +163,17 @@
 
 	"use strict";
 	
-	var React = __webpack_require__(7);
-	var Reflux = __webpack_require__(13);
+	var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
 	
-	var Shop = __webpack_require__(10);
-	var Cart = __webpack_require__(11);
-	var CartStore = __webpack_require__(12);
+	var React = _interopRequire(__webpack_require__(7));
+	
+	var Reflux = _interopRequire(__webpack_require__(13));
+	
+	var Shop = _interopRequire(__webpack_require__(10));
+	
+	var Cart = _interopRequire(__webpack_require__(11));
+	
+	var CartStore = _interopRequire(__webpack_require__(12));
 	
 	var AppComponent = React.createClass({
 	  displayName: "AppComponent",
@@ -648,7 +661,9 @@
 
 	"use strict";
 	
-	var Reflux = __webpack_require__(13);
+	var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
+	
+	var Reflux = _interopRequire(__webpack_require__(13));
 	
 	module.exports = Reflux.createActions(["receiveCartData", "addToCart", "removeFromCart", "changeQuantity"]);
 
@@ -658,8 +673,11 @@
 
 	"use strict";
 	
-	var React = __webpack_require__(7);
-	var Product = __webpack_require__(20);
+	var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
+	
+	var React = _interopRequire(__webpack_require__(7));
+	
+	var Product = _interopRequire(__webpack_require__(20));
 	
 	var ShopComponent = React.createClass({
 	  displayName: "ShopComponent",
@@ -694,8 +712,11 @@
 
 	"use strict";
 	
-	var React = __webpack_require__(7);
-	var CartProduct = __webpack_require__(19);
+	var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
+	
+	var React = _interopRequire(__webpack_require__(7));
+	
+	var CartProduct = _interopRequire(__webpack_require__(19));
 	
 	var CartComponent = React.createClass({
 	  displayName: "CartComponent",
@@ -745,13 +766,19 @@
 
 	"use strict";
 	
+	var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
+	
 	__webpack_require__(24);
 	
-	var Reflux = __webpack_require__(13);
+	var Reflux = _interopRequire(__webpack_require__(13));
+	
 	var extend = __webpack_require__(15).extend;
-	var actions = __webpack_require__(9);
-	var PRODUCTS = __webpack_require__(1);
-	var backend = __webpack_require__(2);
+	
+	var actions = _interopRequire(__webpack_require__(9));
+	
+	var PRODUCTS = _interopRequire(__webpack_require__(1));
+	
+	var backend = _interopRequire(__webpack_require__(2));
 	
 	var CartStore = Reflux.createStore({
 	  listenables: actions,
@@ -2587,8 +2614,11 @@
 
 	"use strict";
 	
-	var React = __webpack_require__(7);
-	var actions = __webpack_require__(9);
+	var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
+	
+	var React = _interopRequire(__webpack_require__(7));
+	
+	var actions = _interopRequire(__webpack_require__(9));
 	
 	var CartProductComponent = React.createClass({
 	  displayName: "CartProductComponent",
@@ -2650,8 +2680,11 @@
 
 	"use strict";
 	
-	var React = __webpack_require__(7);
-	var actions = __webpack_require__(9);
+	var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
+	
+	var React = _interopRequire(__webpack_require__(7));
+	
+	var actions = _interopRequire(__webpack_require__(9));
 	
 	var ProductComponent = React.createClass({
 	  displayName: "ProductComponent",

@@ -1,9 +1,9 @@
-var React = require('react');
-var Reflux = require('reflux');
+import React from 'react';
+import Reflux from 'reflux';
 
-var Shop = require('./ShopComponent');
-var Cart = require('./CartComponent');
-var CartStore = require('../stores/CartStore');
+import Shop from './ShopComponent';
+import Cart from './CartComponent';
+import CartStore from '../stores/CartStore';
 
 var AppComponent = React.createClass({
   mixins: [Reflux.connect(CartStore, 'cart')],
@@ -22,4 +22,4 @@ var AppComponent = React.createClass({
   }
 });
 
-module.exports = AppComponent;
+export default AppComponent;

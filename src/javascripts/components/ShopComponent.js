@@ -1,5 +1,5 @@
-var React = require('react');
-var Product = require('./ProductComponent');
+import React from 'react';
+import Product from './ProductComponent';
 
 var ShopComponent = React.createClass({
   render() {
@@ -18,4 +18,4 @@ var ShopComponent = React.createClass({
   }
 });
 
-module.exports = ShopComponent;
+export default ShopComponent;
