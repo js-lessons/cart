@@ -104,13 +104,12 @@
 	
 	var PRODUCTS = _interopRequire(__webpack_require__(1));
 	
+	var actions = _interopRequire(__webpack_require__(9));
+	
 	var CartStuff = Stuff("shopping_cart");
 	
 	module.exports = {
 	  fetch: function fetch() {
-	    // circular deps workaround
-	    var actions = __webpack_require__(9);
-	
 	    var data = Stuff("shopping_cart").map(function (id) {
 	      var product = Stuff("shopping_cart").get(id);
 	      product.id = id;
@@ -122,11 +121,9 @@
 	
 	  add: function add(code) {
 	    var cartProduct;
-	
 	    var product = PRODUCTS.filter(function (product) {
 	      return product.code === code;
 	    })[0];
-	
 	    var cartProductId = CartStuff.find(function (id) {
 	      return CartStuff.get(id).code === code;
 	    });
@@ -150,7 +147,6 @@
 	    var productId = CartStuff.find(function (id) {
 	      return CartStuff.get(id).code === code;
 	    });
-	
 	    var product = CartStuff.get(productId);
 	
 	    product.quantity = quantity;

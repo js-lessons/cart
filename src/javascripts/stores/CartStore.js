@@ -26,9 +26,7 @@ var CartStore = Reflux.createStore({
   onAddToCart(code) {
     var cartProduct;
 
-    var product = PRODUCTS.filter(product => {
-      return product.code === code;
-    })[0];
+    var product = PRODUCTS.filter(product => product.code === code)[0];
 
     if (this.isInCart(product)) {
       cartProduct = this.getProduct(code);
@@ -62,11 +60,11 @@ var CartStore = Reflux.createStore({
   },
 
   isInCart(product) {
-    return this._cartProducts.some(p => { return p.code == product.code });
+    return this._cartProducts.some(p => p.code == product.code);
   },
 
   getProduct(code) {
-    return this._cartProducts.find(p => { return p.code == code });
+    return this._cartProducts.find(p => p.code == code);
   }
 });
 

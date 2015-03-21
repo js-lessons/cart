@@ -22,14 +22,8 @@ export default {
 
   add(code) {
     var cartProduct;
-
-    var product = PRODUCTS.filter(product => {
-      return product.code === code;
-    })[0];
-
-    var cartProductId = CartStuff.find(id => {
-      return CartStuff.get(id).code === code;
-    });
+    var product = PRODUCTS.filter(product => product.code === code)[0];
+    var cartProductId = CartStuff.find(id => CartStuff.get(id).code === code);
 
     if (cartProductId) {
       cartProduct = CartStuff.get(cartProductId);
@@ -42,17 +36,12 @@ export default {
 
 
   remove(code) {
-    CartStuff.remove(CartStuff.find(id => {
-      return CartStuff.get(id).code === code;
-    }));
+    CartStuff.remove(CartStuff.find(id => CartStuff.get(id).code === code));
   },
 
 
   changeQuantity(code, quantity) {
-    var productId = CartStuff.find(id => {
-      return CartStuff.get(id).code === code;
-    });
-
+    var productId = CartStuff.find(id => CartStuff.get(id).code === code);
     var product = CartStuff.get(productId);
 
     product.quantity = quantity;
