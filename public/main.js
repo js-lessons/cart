@@ -104,12 +104,11 @@
 	
 	var PRODUCTS = _interopRequire(__webpack_require__(1));
 	
-	var actions = _interopRequire(__webpack_require__(9));
-	
 	var CartStuff = Stuff("shopping_cart");
 	
 	module.exports = {
 	  fetch: function fetch() {
+	    var actions = __webpack_require__(9);
 	    var data = Stuff("shopping_cart").map(function (id) {
 	      var product = Stuff("shopping_cart").get(id);
 	      product.id = id;
@@ -661,7 +660,15 @@
 	
 	var Reflux = _interopRequire(__webpack_require__(13));
 	
-	module.exports = Reflux.createActions(["receiveCartData", "addToCart", "removeFromCart", "changeQuantity"]);
+	var backend = _interopRequire(__webpack_require__(2));
+	
+	var actions = Reflux.createActions(["receiveCartData", "addToCart", "removeFromCart", "changeQuantity"]);
+	
+	actions.addToCart.preEmit = backend.add;
+	actions.removeFromCart.preEmit = backend.remove;
+	actions.changeQuantity.preEmit = backend.changeQuantity;
+	
+	module.exports = actions;
 
 /***/ },
 /* 10 */
@@ -774,8 +781,6 @@
 	
 	var PRODUCTS = _interopRequire(__webpack_require__(1));
 	
-	var backend = _interopRequire(__webpack_require__(2));
-	
 	var CartStore = Reflux.createStore({
 	  listenables: actions,
 	
@@ -808,26 +813,18 @@
 	      this._cartProducts.push(cartProduct);
 	    }
 	
-	    backend.add(code);
-	
 	    this.triggerChange();
 	  },
 	
 	  onRemoveFromCart: function onRemoveFromCart(code) {
 	    var cartProduct = this.getProduct(code);
 	    this._cartProducts.splice(this._cartProducts.indexOf(cartProduct), 1);
-	
-	    backend.remove(code);
-	
 	    this.triggerChange();
 	  },
 	
 	  onChangeQuantity: function onChangeQuantity(code, quantity) {
 	    var cartProduct = this.getProduct(code);
 	    cartProduct.quantity = quantity;
-	
-	    backend.changeQuantity(code, quantity);
-	
 	    this.triggerChange();
 	  },
 	

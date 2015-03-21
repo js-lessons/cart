@@ -2,12 +2,12 @@ import '../lib/Stuff';
 
 import { extend } from 'underscore';
 import PRODUCTS from '../data/products';
-import actions from '../actions/CartActions';
 
 var CartStuff = Stuff('shopping_cart');
 
 export default {
   fetch() {
+    var actions = require('../actions/CartActions');
     var data = Stuff('shopping_cart').map(id => {
       var product = Stuff('shopping_cart').get(id);
       product.id = id;

@@ -4,7 +4,6 @@ import Reflux from 'reflux';
 import { extend } from 'underscore';
 import actions from '../actions/CartActions';
 import PRODUCTS from '../data/products';
-import backend from '../utils/backendSync';
 
 var CartStore = Reflux.createStore({
   listenables: actions,
@@ -36,26 +35,18 @@ var CartStore = Reflux.createStore({
       this._cartProducts.push(cartProduct);
     }
 
-    backend.add(code);
-
     this.triggerChange();
   },
 
   onRemoveFromCart(code) {
     var cartProduct = this.getProduct(code);
     this._cartProducts.splice(this._cartProducts.indexOf(cartProduct), 1);
-
-    backend.remove(code);
-
     this.triggerChange();
   },
 
   onChangeQuantity(code, quantity) {
     var cartProduct = this.getProduct(code);
     cartProduct.quantity = quantity;
-
-    backend.changeQuantity(code, quantity);
-
     this.triggerChange();
   },
 
